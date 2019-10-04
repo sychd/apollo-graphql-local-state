@@ -1,0 +1,20 @@
+<div style="display: flex; align-items: center; flex-direction: column;">
+  <div style="height: 50px;">
+    <button *ngIf="facade.isCompareOperationAvailable$ | async"  (click)="enableCompareMode()">
+      Compare results
+    </button>
+    <button *ngIf="facade.isCompareModeEnabled$ | async" (click)="disableCompareMode()">
+      Back to full list
+    </button>
+  </div>
+  <ag-grid-angular
+    #agGrid
+    style="width: 500px; height: 500px;"
+    class="ag-theme-balham"
+    [gridOptions]="facade.agGridOptions"
+    [rowData]="facade.artists$ | async"
+    [columnDefs]="facade.gridColumns$ | async"
+    (selectionChanged)="selectionChanged()"
+  >
+  </ag-grid-angular>
+</div>
